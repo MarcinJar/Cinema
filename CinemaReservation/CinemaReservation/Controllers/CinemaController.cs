@@ -24,5 +24,31 @@ namespace CinemaReservation.Controllers
         {
             return cinemaList;
         }
+
+        // GET: /api/Cinema/id
+        [HttpGet]
+        public Cinema GetCinema(int id)
+        {
+            Cinema cinema = cinemaList.Where(x => x.DBKey == id).FirstOrDefault();
+            return cinema;
+        }
+
+        // POST: /api/Cinema/
+        [HttpPost]
+        public int AddCinema(Cinema cinema)
+        {
+            cinemaList.Add(cinema);
+
+            return cinemaList.Count;
+        }
+
+        // DELETE: /api/Cinema/id
+        [HttpDelete]
+        public int DeleteCinema(int id)
+        {
+            cinemaList.Remove(cinemaList.Where(c => c.DBKey == id).FirstOrDefault());
+
+            return cinemaList.Count();
+        }
     }
 }
