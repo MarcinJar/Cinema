@@ -8,8 +8,11 @@ namespace CinemaReservation.Models
     public class Cinema
     {
         public int DBKey { get; set; }
+
         public string Name { get; set; }
+
         public int NumberOfSeats { get; set; }
+
         public int NumberOfReservedSeats { get; set; }
     }
 }
