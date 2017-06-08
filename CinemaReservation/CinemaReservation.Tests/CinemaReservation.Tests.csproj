@@ -80,6 +80,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CinemaControllerTest.cs" />
+    <Compile Include="FilmShowControllerTest.cs" />
     <Compile Include="MovieControllerTest.cs" />
     <Compile Include="PersonControllerTest.cs" />
     <Compile Include="ReservationControllerTest.cs" />
