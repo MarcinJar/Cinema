@@ -51,6 +51,5 @@ D:\Folder Roboczy\GIT REPOSYTORY\CinemaR\CinemaReservation\CinemaReservation\bin
 D:\Folder Roboczy\GIT REPOSYTORY\CinemaR\CinemaReservation\CinemaReservation\bin\System.Net.Http.Formatting.xml
 D:\Folder Roboczy\GIT REPOSYTORY\CinemaR\CinemaReservation\CinemaReservation\bin\System.Web.Http.xml
 D:\Folder Roboczy\GIT REPOSYTORY\CinemaR\CinemaReservation\CinemaReservation\bin\System.Web.Http.WebHost.xml
-D:\Folder Roboczy\GIT REPOSYTORY\CinemaR\CinemaReservation\CinemaReservation\obj\Debug\CinemaReservation.csprojResolveAssemblyReference.cache
 D:\Folder Roboczy\GIT REPOSYTORY\CinemaR\CinemaReservation\CinemaReservation\obj\Debug\CinemaReservation.dll
 D:\Folder Roboczy\GIT REPOSYTORY\CinemaR\CinemaReservation\CinemaReservation\obj\Debug\CinemaReservation.pdb
