@@ -88,9 +88,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CinemaReservation\CinemaReservation.csproj">
+    <ProjectReference Include="..\CinemaReservation.Model\CinemaReservation.Model.csproj">
+      <Project>{b8b33127-9469-4b3c-b75c-889d4cd74f17}</Project>
+      <Name>CinemaReservation.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CinemaReservation\CinemaReservation.WebApi.csproj">
       <Project>{A78C6149-7C3A-4379-B3DA-562BD85D7003}</Project>
-      <Name>CinemaReservation</Name>
+      <Name>CinemaReservation.WebApi</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

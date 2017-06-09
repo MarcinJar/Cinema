@@ -1,5 +1,5 @@
-﻿using CinemaReservation.Controllers;
-using CinemaReservation.Models;
+﻿using CinemaReservation.WebApi.Controllers;
+using CinemaReservation.Model.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;

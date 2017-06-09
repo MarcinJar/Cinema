@@ -1,6 +1,6 @@
-﻿using CinemaReservation.Controllers;
-using CinemaReservation.Models;
-using CinemaReservation.Models.Enums;
+﻿using CinemaReservation.WebApi.Controllers;
+using CinemaReservation.Model.Models;
+using CinemaReservation.Model.Models.Enums;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;

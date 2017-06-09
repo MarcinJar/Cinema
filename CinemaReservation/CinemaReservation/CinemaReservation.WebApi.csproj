@@ -94,13 +94,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Cinema.cs" />
-    <Compile Include="Models\Enums\DisplayKind.cs" />
-    <Compile Include="Models\Enums\DisplayMode.cs" />
-    <Compile Include="Models\FilmShow.cs" />
-    <Compile Include="Models\Movie.cs" />
-    <Compile Include="Models\Person.cs" />
-    <Compile Include="Models\Reservation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -114,6 +107,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CinemaReservation.Model\CinemaReservation.Model.csproj">
+      <Project>{b8b33127-9469-4b3c-b75c-889d4cd74f17}</Project>
+      <Name>CinemaReservation.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

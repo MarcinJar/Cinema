@@ -1,10 +1,10 @@
-﻿using CinemaReservation.Models.Enums;
+﻿using CinemaReservation.Model.Models.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace CinemaReservation.Models
+namespace CinemaReservation.Model.Models
 {
     public class FilmShow
     {

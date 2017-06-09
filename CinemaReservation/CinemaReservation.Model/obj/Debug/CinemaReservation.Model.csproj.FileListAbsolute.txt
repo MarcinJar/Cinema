@@ -1,0 +1,4 @@
+C:\Users\marcin.jarmulowski\Documents\Folder Roboczy\GIT PROJECK\Cinema\CinemaReservation\CinemaReservation.Model\bin\Debug\CinemaReservation.Model.dll
+C:\Users\marcin.jarmulowski\Documents\Folder Roboczy\GIT PROJECK\Cinema\CinemaReservation\CinemaReservation.Model\bin\Debug\CinemaReservation.Model.pdb
+C:\Users\marcin.jarmulowski\Documents\Folder Roboczy\GIT PROJECK\Cinema\CinemaReservation\CinemaReservation.Model\obj\Debug\CinemaReservation.Model.dll
+C:\Users\marcin.jarmulowski\Documents\Folder Roboczy\GIT PROJECK\Cinema\CinemaReservation\CinemaReservation.Model\obj\Debug\CinemaReservation.Model.pdb

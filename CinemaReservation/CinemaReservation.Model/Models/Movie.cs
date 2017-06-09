@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace CinemaReservation.Models
+namespace CinemaReservation.Model.Models
 {
     public class Movie
     {

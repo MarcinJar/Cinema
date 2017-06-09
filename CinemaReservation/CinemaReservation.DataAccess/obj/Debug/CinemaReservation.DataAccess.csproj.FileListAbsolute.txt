@@ -1,0 +1,4 @@
+C:\Users\marcin.jarmulowski\Documents\Folder Roboczy\GIT PROJECK\Cinema\CinemaReservation\CinemaReservation.DataAccess\bin\Debug\CinemaReservation.DataAccess.dll
+C:\Users\marcin.jarmulowski\Documents\Folder Roboczy\GIT PROJECK\Cinema\CinemaReservation\CinemaReservation.DataAccess\bin\Debug\CinemaReservation.DataAccess.pdb
+C:\Users\marcin.jarmulowski\Documents\Folder Roboczy\GIT PROJECK\Cinema\CinemaReservation\CinemaReservation.DataAccess\obj\Debug\CinemaReservation.DataAccess.dll
+C:\Users\marcin.jarmulowski\Documents\Folder Roboczy\GIT PROJECK\Cinema\CinemaReservation\CinemaReservation.DataAccess\obj\Debug\CinemaReservation.DataAccess.pdb
