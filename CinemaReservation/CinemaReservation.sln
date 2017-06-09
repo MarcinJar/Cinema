@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26430.4
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CinemaReservation.Tests", "CinemaReservation.Tests\CinemaReservation.Tests.csproj", "{B96533F8-9BF0-42B0-AD9F-962CD2E1155E}"
 EndProject
@@ -12,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CinemaReservation.Model", "CinemaReservation.Model\CinemaReservation.Model.csproj", "{B8B33127-9469-4B3C-B75C-889D4CD74F17}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CinemaReservation.WebApi", "CinemaReservation.WebApi\CinemaReservation.WebApi.csproj", "{A78C6149-7C3A-4379-B3DA-562BD85D7003}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CinemaReservation.InterfaceDataAccess", "CinemaReservation.InterfaceDataAccess\CinemaReservation.InterfaceDataAccess.csproj", "{7994AEEE-5077-4D19-B45D-86D2788B1EE1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +63,14 @@ Global
 		{A78C6149-7C3A-4379-B3DA-562BD85D7003}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A78C6149-7C3A-4379-B3DA-562BD85D7003}.Release|x86.ActiveCfg = Release|x86
 		{A78C6149-7C3A-4379-B3DA-562BD85D7003}.Release|x86.Build.0 = Release|x86
+		{7994AEEE-5077-4D19-B45D-86D2788B1EE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7994AEEE-5077-4D19-B45D-86D2788B1EE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7994AEEE-5077-4D19-B45D-86D2788B1EE1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7994AEEE-5077-4D19-B45D-86D2788B1EE1}.Debug|x86.Build.0 = Debug|Any CPU
+		{7994AEEE-5077-4D19-B45D-86D2788B1EE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7994AEEE-5077-4D19-B45D-86D2788B1EE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7994AEEE-5077-4D19-B45D-86D2788B1EE1}.Release|x86.ActiveCfg = Release|Any CPU
+		{7994AEEE-5077-4D19-B45D-86D2788B1EE1}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
