@@ -25,7 +25,8 @@ namespace CinemaReservation.WebApi.Controllers
         [HttpGet]
         public IEnumerable<Cinema> GetAllCinemaRooms()
         {
-            return cinemaList;
+            IEnumerable<Cinema> cinemas = this.cinemaLogic.GetAll();
+            return cinemas;
         }
 
         // GET: /api/Cinema/id

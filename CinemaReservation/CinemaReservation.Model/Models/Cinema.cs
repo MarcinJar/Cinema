@@ -11,8 +11,14 @@ namespace CinemaReservation.Model.Models
 
         public string Name { get; set; }
 
-        public int NumberOfSeats { get; set; }
+        public string City { get; set; }
 
-        public int NumberOfReservedSeats { get; set; }
+        public string Street { get; set; }
+
+        public int BuildNumber { get; set; }
+
+        public string Apartments { get; set; }
+
+        public int PostCode { get; set; }
     }
 }

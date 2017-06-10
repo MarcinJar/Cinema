@@ -38,6 +38,11 @@ namespace CinemaReservation.Core.DataLogic
             return cinema;
         }
 
+        public IEnumerable<Cinema> GetAll()
+        {
+            return this.cinemaRepository.GetAll();
+        }
+
         public Cinema Update(Cinema cinemaToUpdate)
         {
             throw new NotImplementedException();

@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CinemaReservation.Core.DataLogic;
+using CinemaReservation.Core.DataLogic.IDataLogic;
 
 namespace CinemaReservation.Tests
 {
@@ -15,11 +17,11 @@ namespace CinemaReservation.Tests
         //[TestMethod]
         //public void GetCinemaByDbkey_Test()
         //{
-        //    var controller = new CinemaController(cinemaList);
+        //    var controller = new CinemaController();
 
-        //    var result = controller.GetCinema(cinemaList[0].DBKey);
+        //    var result = controller.GetCinema(1);
 
-        //    Assert.AreEqual<string>(result.Name, cinemaList[0].Name);
+        //    Assert.AreNotEqual<string>(result.Name, null);
         //}
 
         //[TestMethod]

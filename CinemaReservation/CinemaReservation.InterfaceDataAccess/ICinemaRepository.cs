@@ -11,6 +11,8 @@ namespace CinemaReservation.InterfaceDataAccess
     {
         Cinema Get(int cinemaDBKey);
 
+        IEnumerable<Cinema> GetAll();
+
         Cinema Add(Cinema cinamaToCreate);
 
         Cinema Update(Cinema cinemaToUpdate);
