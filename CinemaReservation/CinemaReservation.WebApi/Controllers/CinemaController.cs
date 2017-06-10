@@ -1,4 +1,5 @@
-﻿using CinemaReservation.Model.Models;
+﻿using CinemaReservation.Core.DataLogic.IDataLogic;
+using CinemaReservation.Model.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,12 +12,13 @@ namespace CinemaReservation.WebApi.Controllers
     public class CinemaController : ApiController
     {
         private IList<Cinema> cinemaList = new List<Cinema>();
+        private ICinemaLogic cinemaLogic;
 
         public CinemaController() { }
 
-        public CinemaController(IList<Cinema> cinemaList)
+        public CinemaController(ICinemaLogic cinemaLogic)
         {
-            this.cinemaList = cinemaList;
+            this.cinemaLogic = cinemaLogic;
         }
 
         // GET: /api/Cinema/
@@ -30,7 +32,7 @@ namespace CinemaReservation.WebApi.Controllers
         [HttpGet]
         public Cinema GetCinema(int id)
         {
-            Cinema cinema = cinemaList.Where(x => x.DBKey == id).FirstOrDefault();
+            Cinema cinema = this.cinemaLogic.Get(id);
             return cinema;
         }
 

@@ -10,6 +10,10 @@ namespace CinemaReservation.App_Start
 
     using Ninject;
     using Ninject.Web.Common;
+    using Core.DataLogic.IDataLogic;
+    using Core.DataLogic;
+    using InterfaceDataAccess;
+    using DataAccess;
 
     public static class NinjectWebCommon 
     {
@@ -61,6 +65,8 @@ namespace CinemaReservation.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
+            kernel.Bind<ICinemaLogic>().To<CinemaLogic>();
+            kernel.Bind<ICinemaRepository>().To<CinemaRepository>();
         }        
     }
 }
