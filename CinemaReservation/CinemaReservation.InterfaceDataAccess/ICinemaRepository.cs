@@ -18,5 +18,7 @@ namespace CinemaReservation.InterfaceDataAccess
         Cinema Update(Cinema cinemaToUpdate);
 
         bool Delete(int cinemaDBKey);
+
+        List<CinemaRoom> GetAllCinemaRooms(int dbKeyCinema);
     }
 }

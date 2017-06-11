@@ -21,5 +21,9 @@ namespace CinemaReservation.Model.Models
         public int DBKeyCinemaRoom { get; set; }
 
         public int DBKeyMovie { get; set; }
+
+        public Movie Movie { get; set; }
+
+        public CinemaRoom CinemaRoom { get; set; }
     }
 }

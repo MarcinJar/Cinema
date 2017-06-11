@@ -42,12 +42,14 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="Models\Cinema.cs" />
+    <Compile Include="Models\CinemaRoom.cs" />
     <Compile Include="Models\Enums\DisplayKind.cs" />
     <Compile Include="Models\Enums\DisplayMode.cs" />
     <Compile Include="Models\FilmShow.cs" />
     <Compile Include="Models\Movie.cs" />
     <Compile Include="Models\Person.cs" />
     <Compile Include="Models\Reservation.cs" />
+    <Compile Include="Models\Seat.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

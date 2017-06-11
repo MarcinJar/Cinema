@@ -7,6 +7,13 @@ namespace CinemaReservation.Model.Models
 {
     public class Cinema
     {
+        public List<CinemaRoom> CinemaRooms { get; set; }
+
+        public Cinema()
+        {
+            this.CinemaRooms = new List<CinemaRoom>();
+        }
+
         public int DBKey { get; set; }
 
         public string Name { get; set; }

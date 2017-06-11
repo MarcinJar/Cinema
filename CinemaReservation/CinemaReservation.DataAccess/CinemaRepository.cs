@@ -40,13 +40,26 @@ namespace CinemaReservation.DataAccess
         {
             IEnumerable<Cinema> cinemas = null;
 
-            using (SqlConnection dbConn = new SqlConnection(this.connection.ConnectionString))
+            using(SqlConnection dbConn = new SqlConnection(this.connection.ConnectionString))
             {
                 dbConn.Open();
                 cinemas = dbConn.Query<Cinema>("dbo.cinema_all_sel", commandType: CommandType.StoredProcedure).ToList();
             }
 
             return cinemas;
+        }
+
+        public List<CinemaRoom> GetAllCinemaRooms(int cinemaDBKey)
+        {
+            List<CinemaRoom> cinemaRooms = null;
+
+            using (SqlConnection dbConn = new SqlConnection(this.connection.ConnectionString))
+            {
+                dbConn.Open();
+                cinemaRooms = (List<CinemaRoom>)dbConn.Query<CinemaRoom>("dbo.cinema_rooms_all_sel", new { DBKeyCinema = cinemaDBKey }, commandType: CommandType.StoredProcedure);
+            }
+
+            return cinemaRooms;
         }
 
         public Cinema Update(Cinema cinemaToUpdate)

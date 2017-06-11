@@ -35,6 +35,9 @@ namespace CinemaReservation.Core.DataLogic
 
             Cinema cinema = this.cinemaRepository.Get(cinemaDBKey);
 
+            if (cinema != null)
+                cinema.CinemaRooms = this.cinemaRepository.GetAllCinemaRooms(cinemaDBKey);
+
             return cinema;
         }
 
