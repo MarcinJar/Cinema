@@ -1,0 +1,7 @@
+CREATE PROCEDURE movie_del (
+	@DBKey INT
+)
+AS 
+BEGIN
+	DELETE dbo.Movies WHERE DBKey = @DBKey
+END

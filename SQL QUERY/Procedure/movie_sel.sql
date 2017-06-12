@@ -1,0 +1,7 @@
+CREATE PROCEDURE movie_sel (
+	@DBKey INT
+)
+AS
+BEGIN
+	SELECT * FROM dbo.Movies WHERE DBKey = @DBKey;
+END
