@@ -6,7 +6,7 @@ IF OBJECT_ID(N'FilmShows', 'U') IS NOT NULL
 CREATE TABLE FilmShows (
 	DBKey				INT IDENTITY(1,1),
 	DateOfFilmShow		DATE NOT NULL,
-	DisplayMode			VARCHAR DEFAULT ('Lector'),
+	DisplayMode			VARCHAR(50) DEFAULT ('Lector'),
 	DisplayKind			BIT DEFAULT (0),
 	PriceOfTicket		DECIMAL NOT NULL,
 	DBKeyCinemaRooms	INT NOT NULL,
@@ -15,3 +15,5 @@ CREATE TABLE FilmShows (
 	CONSTRAINT FK_FilmShows_CinemaRooms FOREIGN KEY (DBKeyCinemaRooms) REFERENCES CinemaRooms (DBKey),
 	CONSTRAINT FK_FilmShows_Movies FOREIGN KEY (DBKeyMovies) REFERENCES Movies (DBKey)
 )
+
+--ALTER TABLE FilmShows ALTER COLUMN DisplayMode VARCHAR(50);
