@@ -20,7 +20,7 @@ namespace CinemaReservation.Core.DataLogic
 
         public Cinema Add(Cinema cinamaToCreate)
         {
-            throw new NotImplementedException();
+            return this.cinemaRepository.Add(cinamaToCreate);
         }
 
         public bool Delete(int cinemaDBKey)

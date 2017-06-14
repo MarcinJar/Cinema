@@ -42,6 +42,8 @@
   <ItemGroup>
     <Compile Include="DataLogic\CinemaLogic.cs" />
     <Compile Include="DataLogic\IDataLogic\ICinemaLogic.cs" />
+    <Compile Include="DataLogic\IDataLogic\IPersonLogic.cs" />
+    <Compile Include="DataLogic\PersonLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

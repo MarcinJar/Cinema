@@ -15,7 +15,25 @@ namespace CinemaReservation.DataAccess
     {
         public Cinema Add(Cinema cinamaToCreate)
         {
-            throw new NotImplementedException();
+            Cinema cinema = null;
+
+            using (SqlConnection dbConn = new SqlConnection(connection.ConnectionString))
+            {
+                DynamicParameters dyParams = new DynamicParameters();
+
+                dyParams.Add("@Name", cinamaToCreate.Name);
+                dyParams.Add("@PostCode", cinamaToCreate.PostCode);
+                dyParams.Add("@Street", cinamaToCreate.Street);
+                dyParams.Add("@BuildNumber", cinamaToCreate.BuildNumber);
+                dyParams.Add("@CinemaRooms", cinamaToCreate.CinemaRooms);
+                dyParams.Add("@City", cinamaToCreate.City);
+                dyParams.Add("@Apartments", cinamaToCreate.Apartments);
+
+                dbConn.Open();
+                dbConn.Query("dbo.cinema_add", dyParams, commandType: CommandType.StoredProcedure);
+            }
+
+            return cinema;
         }
 
         public bool Delete(int cinemaDBKey)
