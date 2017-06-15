@@ -1,0 +1,7 @@
+CREATE PROCEDURE seat_del (
+	@DBKey INT
+)
+AS 
+BEGIN
+	DELETE dbo.Seats WHERE DBKey = @DBKey
+END

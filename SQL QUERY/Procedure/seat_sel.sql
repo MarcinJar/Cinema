@@ -1,0 +1,7 @@
+CREATE PROCEDURE seat_sel (
+	@DBKey INT
+)
+AS
+BEGIN
+	SELECT * FROM dbo.Seats WHERE DBKey = @DBKey;
+END

@@ -1,0 +1,5 @@
+CREATE PROCEDURE seats_all_sel 
+AS
+BEGIN
+	SELECT * FROM dbo.Seats
+END
