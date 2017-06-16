@@ -30,7 +30,7 @@ namespace CinemaReservation.DataAccess
                 dyParams.Add("@Apartments", cinamaToCreate.Apartments);
 
                 dbConn.Open();
-                dbConn.Query("dbo.cinema_add", dyParams, commandType: CommandType.StoredProcedure);
+                cinema = dbConn.Query("dbo.cinema_add", dyParams, commandType: CommandType.StoredProcedure).FirstOrDefault();
             }
 
             return cinema;
@@ -38,7 +38,22 @@ namespace CinemaReservation.DataAccess
 
         public bool Delete(int cinemaDBKey)
         {
-            throw new NotImplementedException();
+            int result = 0;
+
+            try
+            {
+                using(SqlConnection dbConn = new SqlConnection(connection.ConnectionString))
+                {
+                    dbConn.Open();
+                    result = dbConn.Query<int>("dbp.cinema_del", commandType: CommandType.StoredProcedure).FirstOrDefault();
+                }          
+
+                return result == 1;
+            }
+            catch(Exception ex)
+            {
+                return result == 1;
+            }
         }
 
         public Cinema Get(int cinemaDBKey)
@@ -82,7 +97,32 @@ namespace CinemaReservation.DataAccess
 
         public Cinema Update(Cinema cinemaToUpdate)
         {
-            throw new NotImplementedException();
+            Cinema cinema = null;
+            try
+            {
+                using(SqlConnection dbConn = new SqlConnection(connection.ConnectionString))
+                {
+                    DynamicParameters dyParams = new DynamicParameters();
+
+                    dyParams.Add("@DBKey", cinemaToUpdate.DBKey);
+                    dyParams.Add("@Name", cinemaToUpdate.Name);
+                    dyParams.Add("@PostCode", cinemaToUpdate.PostCode);
+                    dyParams.Add("@Street", cinemaToUpdate.Street);
+                    dyParams.Add("@BuildNumber", cinemaToUpdate.BuildNumber);
+                    dyParams.Add("@CinemaRooms", cinemaToUpdate.CinemaRooms);
+                    dyParams.Add("@City", cinemaToUpdate.City);
+                    dyParams.Add("@Apartments", cinemaToUpdate.Apartments);
+
+                    dbConn.Open();
+                    cinema = dbConn.Query<Cinema>("dbo.cinema_upd", dyParams, commandType: CommandType.StoredProcedure).FirstOrDefault();
+
+                    return cinema;
+                }
+            }
+            catch
+            {
+                return null;
+            }
         }
     }
 }

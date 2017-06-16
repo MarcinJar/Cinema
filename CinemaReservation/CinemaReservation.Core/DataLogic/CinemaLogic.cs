@@ -25,7 +25,7 @@ namespace CinemaReservation.Core.DataLogic
 
         public bool Delete(int cinemaDBKey)
         {
-            throw new NotImplementedException();
+            return this.cinemaRepository.Delete(cinemaDBKey);
         }
 
         public Cinema Get(int cinemaDBKey)
@@ -43,12 +43,20 @@ namespace CinemaReservation.Core.DataLogic
 
         public IEnumerable<Cinema> GetAll()
         {
-            return this.cinemaRepository.GetAll();
+            IEnumerable<Cinema> cinemas = this.cinemaRepository.GetAll();
+
+            if(cinemas != null)
+            foreach(Cinema cinema in cinemas)
+            {
+                cinema.CinemaRooms = this.cinemaRepository.GetAllCinemaRooms(cinema.DBKey);
+            }
+
+            return cinemas;
         }
 
         public Cinema Update(Cinema cinemaToUpdate)
         {
-            throw new NotImplementedException();
+            return this.cinemaRepository.Update(cinemaToUpdate);
         }
     }
 }

@@ -5,34 +5,42 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CinemaReservation.Model.Models;
+using CinemaReservation.InterfaceDataAccess;
 
 namespace CinemaReservation.Core.DataLogic
 {
     public class PersonLogic : IPersonLogic
     {
+        private IPersonRepository personRepository;
+
+        public PersonLogic(IPersonRepository personRepository)
+        {
+            this.personRepository = personRepository;
+        }
+
         public Person Add(Person personToCreate)
         {
-            throw new NotImplementedException();
+            return this.personRepository.Add(personToCreate);
         }
 
         public bool Delete(int personDBKey)
         {
-            throw new NotImplementedException();
+            return this.personRepository.Delete(personDBKey);
         }
 
         public Person Get(int personDBKey)
         {
-            throw new NotImplementedException();
+            return this.personRepository.Get(personDBKey);
         }
 
         public IEnumerable<Person> GetAll()
         {
-            throw new NotImplementedException();
+            return this.personRepository.GetAll();
         }
 
         public Person Update(Person personToUpdate)
         {
-            throw new NotImplementedException();
+            return this.personRepository.Update(personToUpdate);
         }
     }
 }
