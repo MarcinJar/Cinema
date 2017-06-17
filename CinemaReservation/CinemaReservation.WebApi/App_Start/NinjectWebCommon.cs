@@ -69,6 +69,8 @@ namespace CinemaReservation.App_Start
             kernel.Bind<ICinemaRepository>().To<CinemaRepository>();
             kernel.Bind <IPersonLogic>().To<PersonLogic>();
             kernel.Bind<IPersonRepository>().To<IPersonRepository>();
+            kernel.Bind<ICinemaLogic>().To<CinemaLogic>();
+            kernel.Bind<ICinemaRepository>().To<ICinemaRepository>();
         }        
     }
 }

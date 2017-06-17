@@ -7,16 +7,8 @@ using System.Threading.Tasks;
 
 namespace CinemaReservation.Core.DataLogic.IDataLogic
 {
-    public interface ICinemaLogic
+    public interface ICinemaLogic : IBaseLogic<Cinema>
     {
-        Cinema Get(int cinemaDBKey);
 
-        IEnumerable<Cinema> GetAll();
-
-        Cinema Add(Cinema cinamaToCreate);
-
-        Cinema Update(Cinema cinemaToUpdate);
-
-        bool Delete(int cinemaDBKey);
     }
 }

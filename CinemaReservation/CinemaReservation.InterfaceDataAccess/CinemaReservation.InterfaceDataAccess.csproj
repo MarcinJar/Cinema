@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IBaseRepository.cs" />
     <Compile Include="ICinemaRepository.cs" />
     <Compile Include="IMovieRepository.cs" />
     <Compile Include="IPersonRepository.cs" />

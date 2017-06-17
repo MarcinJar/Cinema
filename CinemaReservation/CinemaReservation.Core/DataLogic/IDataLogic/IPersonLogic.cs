@@ -7,16 +7,8 @@ using System.Threading.Tasks;
 
 namespace CinemaReservation.Core.DataLogic.IDataLogic
 {
-    public interface IPersonLogic
+    public interface IPersonLogic : IBaseLogic<Person>
     {
-        Person Get(int personDBKey);
 
-        IEnumerable<Person> GetAll();
-
-        Person Add(Person personToCreate);
-
-        Person Update(Person personToUpdate);
-
-        bool Delete(int personDBKey);
     }
 }

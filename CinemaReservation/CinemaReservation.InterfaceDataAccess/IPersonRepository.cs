@@ -7,16 +7,8 @@ using System.Threading.Tasks;
 
 namespace CinemaReservation.InterfaceDataAccess
 {
-    public interface IPersonRepository
+    public interface IPersonRepository : IBaseRepository<Person>
     {
-        Person Get(int personDBKey);
 
-        IEnumerable<Person> GetAll();
-
-        Person Add(Person personToCreate);
-
-        Person Update(Person personToUpdate);
-
-        bool Delete(int personDBKey);
     }
 }
