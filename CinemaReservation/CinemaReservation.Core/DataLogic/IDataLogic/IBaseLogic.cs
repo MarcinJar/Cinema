@@ -8,14 +8,14 @@ namespace CinemaReservation.Core.DataLogic.IDataLogic
 {
     public interface IBaseLogic<T>
     {
-        T Get(int cinemaDBKey);
+        T Get(int DBKey);
 
         IEnumerable<T> GetAll();
 
-        T Add(T cinamaToCreate);
+        T Add(T toCreate);
 
-        T Update(T cinemaToUpdate);
+        T Update(T toUpdate);
 
-        bool Delete(int cinemaDBKey);
+        bool Delete(int DBKey);
     }
 }

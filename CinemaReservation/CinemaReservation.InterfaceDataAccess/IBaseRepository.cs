@@ -9,14 +9,14 @@ namespace CinemaReservation.InterfaceDataAccess
 {
     public interface IBaseRepository<T>
     {
-        T Get(int movieDBKey);
+        T Get(int DBKey);
 
         IEnumerable<T> GetAll();
 
-        T Add(T movieToCreate);
+        T Add(T toCreate);
 
-        T Update(T movieToUpdate);
+        T Update(T toUpdate);
 
-        bool Delete(int movieDBKey);
+        bool Delete(int DBKey);
     }
 }

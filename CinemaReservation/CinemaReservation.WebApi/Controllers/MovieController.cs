@@ -1,4 +1,5 @@
-﻿using CinemaReservation.Model.Models;
+﻿using CinemaReservation.Core.DataLogic.IDataLogic;
+using CinemaReservation.Model.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,55 +11,51 @@ namespace CinemaReservation.WebApi.Controllers
 {
     public class MovieController : ApiController
     {
-        private IList<Movie> listOfMovies = new List<Movie>();
+        private IList<Movie> movieList = new List<Movie>();
+
+        private IMovieLogic movieLogic;
 
         public MovieController() { }
 
-        public MovieController( IList<Movie> movies)
+        public MovieController(IMovieLogic movieLogic)
         {
-            this.listOfMovies = movies;
+            this.movieLogic = movieLogic;
         }
 
         // GET: /api/Movie/
         [HttpGet]
         public IEnumerable<Movie> GetMovies()
         {
-            return listOfMovies;
+            movieList = this.movieLogic.GetAll().ToList();
+            return movieList;
         }
 
         // GET: /api/Movie/id
         [HttpGet]
         public Movie GetMovieById(int id)
         {
-            return listOfMovies.Where(x => x.DBKey == id).FirstOrDefault();
+            return this.movieLogic.Get(id);
         }
 
         // PUT: /api/Movie/
         [HttpPut]
         public Movie UpdateMovie(Movie movie)
         {
-            Movie mov = listOfMovies.Where(x => x.DBKey == movie.DBKey).FirstOrDefault();
-            mov.Name = movie.Name;
-
-            return mov;
+            return this.movieLogic.Update(movie);
         }
 
         // POST: /api/Movie/
         [HttpPost]
-        public int AddMovie(Movie movie)
+        public Movie AddMovie(Movie movie)
         {
-            listOfMovies.Add(movie);
-
-            return listOfMovies.Count();
+            return this.movieLogic.Add(movie);
         }
 
         // DELETE: /api/Movie/id
         [HttpDelete]
-        public int DeleteMovie(int id)
+        public bool DeleteMovie(int id)
         {
-            listOfMovies.Remove(listOfMovies.Where(x => x.DBKey == id).FirstOrDefault());
-
-            return listOfMovies.Count();
+            return this.movieLogic.Delete(id);
         }
     }
 }
