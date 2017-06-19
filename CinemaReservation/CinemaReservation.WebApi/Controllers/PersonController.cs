@@ -1,4 +1,5 @@
-﻿using CinemaReservation.Model.Models;
+﻿using CinemaReservation.Core.DataLogic.IDataLogic;
+using CinemaReservation.Model.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,54 +12,48 @@ namespace CinemaReservation.WebApi.Controllers
     public class PersonController : ApiController
     {
         private IList<Person> listOfPersons = new List<Person>();
+        private IPersonLogic personLogic;
 
         public PersonController() { }
 
-        public PersonController(IList<Person> person)
+        public PersonController(IPersonLogic personLogic)
         {
-            this.listOfPersons = person;
+            this.personLogic = personLogic;
         }
 
         // GET: /api/Person/
         [HttpGet]
-        public IEnumerable<Person> GetPerson()
+        public IEnumerable<Person> GetPersons()
         {
-            return listOfPersons;
+            return this.personLogic.GetAll();
         }
 
         // GET: /api/Person/id
         [HttpGet]
         public Person GetPersonById(int id)
         {
-            return listOfPersons.Where(x => x.DBKey == id).FirstOrDefault();
+            return this.personLogic.Get(id);
         }
 
         // PUT: /api/Person/
         [HttpPut]
         public Person UpdatePerson(Person person)
         {
-            Person per = listOfPersons.Where(x => x.DBKey == person.DBKey).FirstOrDefault();
-            per.Name = person.Name;
-
-            return per;
+            return this.personLogic.Update(person);
         }
 
         // POST: /api/Person/
         [HttpPost]
-        public int AddPerson(Person person)
+        public Person AddPerson(Person person)
         {
-            listOfPersons.Add(person);
-
-            return listOfPersons.Count();
+            return this.personLogic.Add(person);
         }
 
         // DELETE: /api/Person/id
         [HttpDelete]
-        public int DeletePerson(int id)
+        public bool DeletePerson(int id)
         {
-            listOfPersons.Remove(listOfPersons.Where(x => x.DBKey == id).FirstOrDefault());
-
-            return listOfPersons.Count();
+            return this.personLogic.Delete(id);
         }
     }
 }
