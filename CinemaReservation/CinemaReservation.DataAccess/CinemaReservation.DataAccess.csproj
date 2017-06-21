@@ -50,6 +50,7 @@
     <Compile Include="MovieRepository.cs" />
     <Compile Include="PersonRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReservationRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CinemaReservation.InterfaceDataAccess\CinemaReservation.InterfaceDataAccess.csproj">

@@ -9,7 +9,7 @@ using CinemaReservation.InterfaceDataAccess;
 
 namespace CinemaReservation.Core.DataLogic
 {
-    class ReservationLogic : IReservationLogic
+    public class ReservationLogic : IReservationLogic
     {
         private IReservationRepository reservationRepository;
 
