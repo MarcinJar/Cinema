@@ -1,4 +1,5 @@
-﻿using CinemaReservation.Model.Models;
+﻿using CinemaReservation.Core.DataLogic.IDataLogic;
+using CinemaReservation.Model.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,53 +13,48 @@ namespace CinemaReservation.WebApi.Controllers
     {
         private IList<Reservation> listOfReservations = new List<Reservation>();
 
+        private IReservationLogic reservationLogic;
+
         public ReservationController() { }
 
-        public ReservationController(IList<Reservation> reservation)
+        public ReservationController(IReservationLogic reservationLogic)
         {
-            this.listOfReservations = reservation;
+            this.reservationLogic = reservationLogic;
         }
 
         // GET: /api/Reservation/
         [HttpGet]
         public IEnumerable<Reservation> GetReservations()
         {
-            return listOfReservations;
+            return this.reservationLogic.GetAll();
         }
 
         // GET: /api/Reservation/id
         [HttpGet]
         public Reservation GetReservationById(int id)
         {
-            return listOfReservations.Where(x => x.DBKey == id).FirstOrDefault();
+            return this.reservationLogic.Get(id);
         }
 
         // PUT: /api/Reservation/
         [HttpPut]
         public Reservation UpdateReservation(Reservation reservation)
         {
-            Reservation res = listOfReservations.Where(x => x.DBKey == reservation.DBKey).FirstOrDefault();
-            res.DateOfReservation = reservation.DateOfReservation;
-
-            return res;
+            return this.reservationLogic.Update(reservation);
         }
 
         // POST: /api/Reservation/
         [HttpPost]
-        public int AddReservation(Reservation person)
+        public Reservation AddReservation(Reservation reservation)
         {
-            listOfReservations.Add(person);
-
-            return listOfReservations.Count();
+            return this.reservationLogic.Add(reservation);
         }
 
         // DELETE: /api/Reservation/id
         [HttpDelete]
-        public int DeleteReservation(int id)
+        public bool DeleteReservation(int id)
         {
-            listOfReservations.Remove(listOfReservations.Where(x => x.DBKey == id).FirstOrDefault());
-
-            return listOfReservations.Count();
+            return this.reservationLogic.Delete(id);
         }
     }
 }
