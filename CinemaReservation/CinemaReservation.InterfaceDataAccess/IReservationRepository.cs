@@ -9,5 +9,6 @@ namespace CinemaReservation.InterfaceDataAccess
 {
     public interface IReservationRepository : IBaseRepository<Reservation>
     {
+        List<Seat> GetReservationSeats(int DBKeyReservation);
     }
 }

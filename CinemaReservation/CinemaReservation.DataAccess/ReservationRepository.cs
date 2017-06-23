@@ -78,6 +78,19 @@ namespace CinemaReservation.DataAccess
             }
         }
 
+        public List<Seat> GetReservationSeats(int DBKeyReservation)
+        {
+            List<Seat> listOfReservationSeats = null;
+
+            using (SqlConnection dbConn = new SqlConnection(connection.ConnectionString))
+            {
+                dbConn.Open();
+                listOfReservationSeats = dbConn.Query<Seat>("dbo.reservation_seats_sel", commandType: CommandType.StoredProcedure).ToList();
+            }
+
+            return listOfReservationSeats;
+        }
+
         public Reservation Update(Reservation toUpdate)
         {
             Reservation reservation = null;

@@ -30,7 +30,11 @@ namespace CinemaReservation.Core.DataLogic
 
         public Reservation Get(int DBKey)
         {
-            return this.reservationRepository.Get(DBKey);
+            Reservation reservation = this.reservationRepository.Get(DBKey);
+
+            reservation.Seats = this.reservationRepository.GetReservationSeats(DBKey);
+
+            return reservation;
         }
 
         public IEnumerable<Reservation> GetAll()
