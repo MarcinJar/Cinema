@@ -41,6 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataLogic\CinemaLogic.cs" />
+    <Compile Include="DataLogic\FilmShowLogic.cs" />
+    <Compile Include="DataLogic\IDataLogic\IFilmShowLogic.cs" />
     <Compile Include="DataLogic\ReservationLogic.cs" />
     <Compile Include="DataLogic\IDataLogic\IBaseLogic.cs" />
     <Compile Include="DataLogic\IDataLogic\ICinemaLogic.cs" />
