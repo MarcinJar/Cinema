@@ -24,11 +24,11 @@ namespace CinemaReservation.DataAccess
                     DynamicParameters dyParams = new DynamicParameters();
 
                     dyParams.Add("@AcceptableAge", movieToCreate.AcceptableAge);
-                    dyParams.Add("@AcceptableAge", movieToCreate.Author);
-                    dyParams.Add("@AcceptableAge", movieToCreate.Description);
-                    dyParams.Add("@AcceptableAge", movieToCreate.DurationTime);
-                    dyParams.Add("@AcceptableAge", movieToCreate.Gener);
-                    dyParams.Add("@AcceptableAge", movieToCreate.Name);
+                    dyParams.Add("@Author", movieToCreate.Author);
+                    dyParams.Add("@Description", movieToCreate.Description);
+                    dyParams.Add("@DurationTime", movieToCreate.DurationTime);
+                    dyParams.Add("@Gener", movieToCreate.Gener);
+                    dyParams.Add("@Name", movieToCreate.Name);
 
                     dbConn.Open();
                     movie = dbConn.Query<Movie>("dbo.movie_add", dyParams, commandType: CommandType.StoredProcedure).FirstOrDefault();
@@ -93,11 +93,11 @@ namespace CinemaReservation.DataAccess
 
                     dyParams.Add("@DBKey", movieToUpdate.DBKey);
                     dyParams.Add("@AcceptableAge", movieToUpdate.AcceptableAge);
-                    dyParams.Add("@AcceptableAge", movieToUpdate.Author);
-                    dyParams.Add("@AcceptableAge", movieToUpdate.Description);
-                    dyParams.Add("@AcceptableAge", movieToUpdate.DurationTime);
-                    dyParams.Add("@AcceptableAge", movieToUpdate.Gener);
-                    dyParams.Add("@AcceptableAge", movieToUpdate.Name);
+                    dyParams.Add("@Author", movieToUpdate.Author);
+                    dyParams.Add("@Description", movieToUpdate.Description);
+                    dyParams.Add("@DurationTime", movieToUpdate.DurationTime);
+                    dyParams.Add("@Gener", movieToUpdate.Gener);
+                    dyParams.Add("@Name", movieToUpdate.Name);
 
                     dbConn.Open();
                     movie = dbConn.Query<Movie>("dbo.movie_upd", dyParams, commandType: CommandType.StoredProcedure).FirstOrDefault();
