@@ -73,6 +73,8 @@ namespace CinemaReservation.App_Start
             kernel.Bind<IMovieRepository>().To<MovieRepository>();
             kernel.Bind<IReservationLogic>().To<ReservationLogic>();
             kernel.Bind<IReservationRepository>().To<ReservationRepository>();
+            kernel.Bind<IFilmShowLogic>().To<FilmShowLogic>();
+            kernel.Bind<IFilmShowRepository>().To<FilmShowRepository>();
         }        
     }
 }

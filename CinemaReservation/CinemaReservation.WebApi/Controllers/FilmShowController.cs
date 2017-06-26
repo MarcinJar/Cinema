@@ -1,4 +1,5 @@
-﻿using CinemaReservation.Model.Models;
+﻿using CinemaReservation.Core.DataLogic.IDataLogic;
+using CinemaReservation.Model.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,54 +13,48 @@ namespace CinemaReservation.WebApi.Controllers
     {
         private IList<FilmShow> filmShowList = new List<FilmShow>();
 
+        private IFilmShowLogic filmShowLogic;
+
         public FilmShowController() { }
 
-        public FilmShowController(IList<FilmShow> filmShowList)
+        public FilmShowController(IFilmShowLogic filmShowLogic)
         {
-            this.filmShowList = filmShowList;
+            this.filmShowLogic = filmShowLogic;
         }
 
         // GET: /api/FilmShow/
         [HttpGet]
         public IEnumerable<FilmShow> GetAllFilmShows()
         {
-            return filmShowList;
+            return this.filmShowLogic.GetAll();
         }
 
         // GET: /api/FilmShow/id
         [HttpGet]
         public FilmShow GetFilmShow(int id)
         {
-            FilmShow filmShow = filmShowList.Where(x => x.DBKey == id).FirstOrDefault();
-            return filmShow;
+            return this.filmShowLogic.Get(id);
         }
 
         // POST: /api/FilmShow/
         [HttpPost]
-        public int AddFilmShow(FilmShow filmShow)
+        public FilmShow AddFilmShow(FilmShow filmShow)
         {
-            filmShowList.Add(filmShow);
-
-            return filmShowList.Count;
+            return this.filmShowLogic.Add(filmShow);
         }
 
         // PUT: /api/FilmShow/
         [HttpPut]
         public FilmShow UpdateFilmShow(FilmShow filmShow)
         {
-            FilmShow filS = filmShowList.Where(x => x.DBKey == filmShow.DBKey).FirstOrDefault();
-            filS.DateOfFilmShow = filmShow.DateOfFilmShow;
-
-            return filS;
+            return this.filmShowLogic.Update(filmShow);
         }
 
         // DELETE: /api/FilmShow/id
         [HttpDelete]
-        public int DeleteFilmShow(int id)
+        public bool DeleteFilmShow(int id)
         {
-            filmShowList.Remove(filmShowList.Where(c => c.DBKey == id).FirstOrDefault());
-
-            return filmShowList.Count();
+            return this.filmShowLogic.Delete(id);
         }
     }
 }
