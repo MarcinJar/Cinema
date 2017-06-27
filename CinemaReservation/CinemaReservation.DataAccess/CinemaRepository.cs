@@ -19,18 +19,31 @@ namespace CinemaReservation.DataAccess
 
             using (SqlConnection dbConn = new SqlConnection(connection.ConnectionString))
             {
-                DynamicParameters dyParams = new DynamicParameters();
-
-                dyParams.Add("@Name", cinamaToCreate.Name);
-                dyParams.Add("@PostCode", cinamaToCreate.PostCode);
-                dyParams.Add("@Street", cinamaToCreate.Street);
-                dyParams.Add("@BuildNumber", cinamaToCreate.BuildNumber);
-                dyParams.Add("@CinemaRooms", cinamaToCreate.CinemaRooms);
-                dyParams.Add("@City", cinamaToCreate.City);
-                dyParams.Add("@Apartments", cinamaToCreate.Apartments);
-
                 dbConn.Open();
-                cinema = dbConn.Query("dbo.cinema_add", dyParams, commandType: CommandType.StoredProcedure).FirstOrDefault();
+                using (SqlTransaction dbTran = dbConn.BeginTransaction())
+                {
+
+                    try
+                    {
+                        DynamicParameters dyParams = new DynamicParameters();
+
+                        dyParams.Add("@Name", cinamaToCreate.Name);
+                        dyParams.Add("@PostCode", cinamaToCreate.PostCode);
+                        dyParams.Add("@Street", cinamaToCreate.Street);
+                        dyParams.Add("@BuildNumber", cinamaToCreate.BuildNumber);
+                        dyParams.Add("@CinemaRooms", cinamaToCreate.CinemaRooms);
+                        dyParams.Add("@City", cinamaToCreate.City);
+                        dyParams.Add("@Apartments", cinamaToCreate.Apartments);
+
+                        cinema = dbConn.Query("dbo.cinema_add", dyParams, commandType: CommandType.StoredProcedure, transaction: dbTran).FirstOrDefault();
+
+                        dbTran.Commit();
+                    }
+                    catch
+                    {
+                        dbTran.Rollback();
+                    }
+                }
             }
 
             return cinema;
@@ -45,7 +58,19 @@ namespace CinemaReservation.DataAccess
                 using(SqlConnection dbConn = new SqlConnection(connection.ConnectionString))
                 {
                     dbConn.Open();
-                    result = dbConn.Query<int>("dbp.cinema_del", commandType: CommandType.StoredProcedure).FirstOrDefault();
+                    using (SqlTransaction dbTran = dbConn.BeginTransaction())
+                    {
+                        try
+                        {
+                            result = dbConn.Query<int>("dbp.cinema_del", commandType: CommandType.StoredProcedure, transaction: dbTran).FirstOrDefault();
+
+                            dbTran.Commit();
+                        }
+                        catch
+                        {
+                            dbTran.Rollback();
+                        }
+                    }
                 }          
 
                 return result == 1;
@@ -102,19 +127,31 @@ namespace CinemaReservation.DataAccess
             {
                 using(SqlConnection dbConn = new SqlConnection(connection.ConnectionString))
                 {
-                    DynamicParameters dyParams = new DynamicParameters();
-
-                    dyParams.Add("@DBKey", cinemaToUpdate.DBKey);
-                    dyParams.Add("@Name", cinemaToUpdate.Name);
-                    dyParams.Add("@PostCode", cinemaToUpdate.PostCode);
-                    dyParams.Add("@Street", cinemaToUpdate.Street);
-                    dyParams.Add("@BuildNumber", cinemaToUpdate.BuildNumber);
-                    dyParams.Add("@CinemaRooms", cinemaToUpdate.CinemaRooms);
-                    dyParams.Add("@City", cinemaToUpdate.City);
-                    dyParams.Add("@Apartments", cinemaToUpdate.Apartments);
-
                     dbConn.Open();
-                    cinema = dbConn.Query<Cinema>("dbo.cinema_upd", dyParams, commandType: CommandType.StoredProcedure).FirstOrDefault();
+                    using (SqlTransaction dbTran = dbConn.BeginTransaction())
+                    {
+                        try
+                        {
+                            DynamicParameters dyParams = new DynamicParameters();
+
+                            dyParams.Add("@DBKey", cinemaToUpdate.DBKey);
+                            dyParams.Add("@Name", cinemaToUpdate.Name);
+                            dyParams.Add("@PostCode", cinemaToUpdate.PostCode);
+                            dyParams.Add("@Street", cinemaToUpdate.Street);
+                            dyParams.Add("@BuildNumber", cinemaToUpdate.BuildNumber);
+                            dyParams.Add("@CinemaRooms", cinemaToUpdate.CinemaRooms);
+                            dyParams.Add("@City", cinemaToUpdate.City);
+                            dyParams.Add("@Apartments", cinemaToUpdate.Apartments);
+
+                            cinema = dbConn.Query<Cinema>("dbo.cinema_upd", dyParams, commandType: CommandType.StoredProcedure, transaction: dbTran).FirstOrDefault();
+
+                            dbTran.Commit();
+                        }
+                        catch (Exception e)
+                        {
+                            dbTran.Rollback();
+                        }
+                    }
 
                     return cinema;
                 }

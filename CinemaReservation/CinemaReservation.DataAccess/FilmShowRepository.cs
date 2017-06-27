@@ -21,17 +21,29 @@ namespace CinemaReservation.DataAccess
             {
                 using (SqlConnection dbConn = new SqlConnection(connection.ConnectionString))
                 {
-                    DynamicParameters dyParams = new DynamicParameters();
-
-                    dyParams.Add("@CinemaRoom", toCreate.CinemaRoom);
-                    dyParams.Add("@DateOfFilmShow", toCreate.DateOfFilmShow);
-                    dyParams.Add("@DBKeyCinemaRoom", toCreate.DBKeyCinemaRoom);
-                    dyParams.Add("@DBKeyMovie", toCreate.DBKeyMovie);
-                    dyParams.Add("@DisplayKind", toCreate.DisplayKind);
-                    dyParams.Add("@DisplayMode", toCreate.DisplayMode);
-
                     dbConn.Open();
-                    filmShow = dbConn.Query<FilmShow>("dbo.filmshow_add", dyParams, commandType: CommandType.StoredProcedure).FirstOrDefault();
+                    using (SqlTransaction dbTran = dbConn.BeginTransaction())
+                    {
+                        try
+                        {
+                            DynamicParameters dyParams = new DynamicParameters();
+
+                            dyParams.Add("@CinemaRoom", toCreate.CinemaRoom);
+                            dyParams.Add("@DateOfFilmShow", toCreate.DateOfFilmShow);
+                            dyParams.Add("@DBKeyCinemaRoom", toCreate.DBKeyCinemaRoom);
+                            dyParams.Add("@DBKeyMovie", toCreate.DBKeyMovie);
+                            dyParams.Add("@DisplayKind", toCreate.DisplayKind);
+                            dyParams.Add("@DisplayMode", toCreate.DisplayMode);
+
+                            filmShow = dbConn.Query<FilmShow>("dbo.filmshow_add", dyParams, commandType: CommandType.StoredProcedure, transaction: dbTran).FirstOrDefault();
+
+                            dbTran.Commit();
+                        }
+                        catch
+                        {
+                            dbTran.Rollback();
+                        }
+                    }
                 }
 
                 return filmShow;
@@ -49,7 +61,19 @@ namespace CinemaReservation.DataAccess
             using (SqlConnection dbConn = new SqlConnection(connection.ConnectionString))
             {
                 dbConn.Open();
-                resut = dbConn.Query<int>("dbo.filmshow_del", new { DBKey = DBKey }, commandType: CommandType.StoredProcedure).FirstOrDefault();
+                using (SqlTransaction dbTran = dbConn.BeginTransaction())
+                {
+                    try
+                    {
+                        resut = dbConn.Query<int>("dbo.filmshow_del", new { DBKey = DBKey }, commandType: CommandType.StoredProcedure, transaction: dbTran).FirstOrDefault();
+
+                        dbTran.Commit();
+                    }
+                    catch
+                    {
+                        dbTran.Rollback();
+                    }
+                }
             }
 
             return resut == 1;
@@ -89,18 +113,30 @@ namespace CinemaReservation.DataAccess
             {
                 using (SqlConnection dbConn = new SqlConnection(connection.ConnectionString))
                 {
-                    DynamicParameters dyParams = new DynamicParameters();
-
-                    dyParams.Add("@DBKey", toUpdate.DBKey);
-                    dyParams.Add("@CinemaRoom", toUpdate.CinemaRoom);
-                    dyParams.Add("@DateOfFilmShow", toUpdate.DateOfFilmShow);
-                    dyParams.Add("@DBKeyCinemaRoom", toUpdate.DBKeyCinemaRoom);
-                    dyParams.Add("@DBKeyMovie", toUpdate.DBKeyMovie);
-                    dyParams.Add("@DisplayKind", toUpdate.DisplayKind);
-                    dyParams.Add("@DisplayMode", toUpdate.DisplayMode);
-
                     dbConn.Open();
-                    filmShow = dbConn.Query<FilmShow>("dbo.movie_upd", dyParams, commandType: CommandType.StoredProcedure).FirstOrDefault();
+                    using (SqlTransaction dbTran = dbConn.BeginTransaction())
+                    {
+                        try
+                        {
+                            DynamicParameters dyParams = new DynamicParameters();
+
+                            dyParams.Add("@DBKey", toUpdate.DBKey);
+                            dyParams.Add("@CinemaRoom", toUpdate.CinemaRoom);
+                            dyParams.Add("@DateOfFilmShow", toUpdate.DateOfFilmShow);
+                            dyParams.Add("@DBKeyCinemaRoom", toUpdate.DBKeyCinemaRoom);
+                            dyParams.Add("@DBKeyMovie", toUpdate.DBKeyMovie);
+                            dyParams.Add("@DisplayKind", toUpdate.DisplayKind);
+                            dyParams.Add("@DisplayMode", toUpdate.DisplayMode);
+
+                            filmShow = dbConn.Query<FilmShow>("dbo.movie_upd", dyParams, commandType: CommandType.StoredProcedure, transaction: dbTran).FirstOrDefault();
+
+                            dbTran.Commit();
+                        }
+                        catch
+                        {
+                            dbTran.Rollback();
+                        }
+                    }
                 }
 
                 return filmShow;
