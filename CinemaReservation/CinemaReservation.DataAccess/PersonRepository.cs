@@ -20,17 +20,28 @@ namespace CinemaReservation.DataAccess
             {
                 using (SqlConnection dbConn = new SqlConnection(connection.ConnectionString))
                 {
-                    DynamicParameters dyParams = new DynamicParameters();
-
-                    dyParams.Add("@DateOfBirth", personToCreate.DateOfBirth);
-                    dyParams.Add("@Discount", personToCreate.Discount);
-                    dyParams.Add("@Login", personToCreate.Login);
-                    dyParams.Add("@Name", personToCreate.Name);
-                    dyParams.Add("@Password", personToCreate.Password);
-                    dyParams.Add("@Surname", personToCreate.Surname);
-
                     dbConn.Open();
-                    person = dbConn.Query<Person>("odb.person_add", dyParams, commandType: CommandType.StoredProcedure).FirstOrDefault();
+                    using (SqlTransaction dbTran = dbConn.BeginTransaction())
+                    {
+                        try
+                        {
+                            DynamicParameters dyParams = new DynamicParameters();
+
+                            dyParams.Add("@DateOfBirth", personToCreate.DateOfBirth);
+                            dyParams.Add("@Discount", personToCreate.Discount);
+                            dyParams.Add("@Login", personToCreate.Login);
+                            dyParams.Add("@Name", personToCreate.Name);
+                            dyParams.Add("@Password", personToCreate.Password);
+                            dyParams.Add("@Surname", personToCreate.Surname);
+
+                            person = dbConn.Query<Person>("odb.person_add", dyParams, commandType: CommandType.StoredProcedure, transaction: dbTran).FirstOrDefault();
+                            dbTran.Commit();
+                        }
+                        catch
+                        {
+                            dbTran.Rollback();
+                        }
+                    }
                 }
 
                 return person;
@@ -44,10 +55,22 @@ namespace CinemaReservation.DataAccess
         public bool Delete(int personDBKey)
         {
             int result = 0;
-            using(SqlConnection dbConn = new SqlConnection(connection.ConnectionString))
+
+            using (SqlConnection dbConn = new SqlConnection(connection.ConnectionString))
             {
                 dbConn.Open();
-                result = dbConn.Query<int>("dbo.person_del", new { DBKey = personDBKey } ,commandType: CommandType.StoredProcedure).FirstOrDefault();
+                using (SqlTransaction dbTran = dbConn.BeginTransaction())
+                {
+                    try
+                    {
+                        result = dbConn.Query<int>("dbo.person_del", new { DBKey = personDBKey }, commandType: CommandType.StoredProcedure, transaction: dbTran).FirstOrDefault();
+                        dbTran.Commit();
+                    }
+                    catch
+                    {
+                        dbTran.Rollback();
+                    }
+                }
             }
 
             return result == 1; 
@@ -87,18 +110,29 @@ namespace CinemaReservation.DataAccess
             {
                 using (SqlConnection dbConn = new SqlConnection(connection.ConnectionString))
                 {
-                    DynamicParameters dyParams = new DynamicParameters();
+                    using (SqlTransaction dbTran = dbConn.BeginTransaction())
+                    {
+                        try
+                        {
+                            DynamicParameters dyParams = new DynamicParameters();
 
-                    dyParams.Add("@DateOfBirth", personToUpdate.DateOfBirth);
-                    dyParams.Add("@DBKey", personToUpdate.DBKey);
-                    dyParams.Add("@Discount", personToUpdate.Discount);
-                    dyParams.Add("@Login", personToUpdate.Login);
-                    dyParams.Add("@Name", personToUpdate.Name);
-                    dyParams.Add("@Password", personToUpdate.Password);
-                    dyParams.Add("@Surname", personToUpdate.Surname);
+                            dyParams.Add("@DateOfBirth", personToUpdate.DateOfBirth);
+                            dyParams.Add("@DBKey", personToUpdate.DBKey);
+                            dyParams.Add("@Discount", personToUpdate.Discount);
+                            dyParams.Add("@Login", personToUpdate.Login);
+                            dyParams.Add("@Name", personToUpdate.Name);
+                            dyParams.Add("@Password", personToUpdate.Password);
+                            dyParams.Add("@Surname", personToUpdate.Surname);
 
-                    dbConn.Open();
-                    person = dbConn.Query<Person>("dbo.person_upd", dyParams, commandType: CommandType.StoredProcedure).FirstOrDefault();
+                            dbConn.Open();
+                            person = dbConn.Query<Person>("dbo.person_upd", dyParams, commandType: CommandType.StoredProcedure, transaction: dbTran).FirstOrDefault();
+                            dbTran.Commit();
+                        }
+                        catch
+                        {
+                            dbTran.Rollback();
+                        }
+                    }
                 }
 
                 return person;
