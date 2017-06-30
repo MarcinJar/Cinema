@@ -19,14 +19,25 @@ namespace CinemaReservation.DataAccess
 
             using (SqlConnection dbConn = new SqlConnection(connection.ConnectionString))
             {
-                DynamicParameters dbParams = new DynamicParameters();
-
-                dbParams.Add("@@DateOfReservation", toCreate.DateOfReservation);
-                dbParams.Add("@DBKeyFilmShow", toCreate.DBKeyFilmShow);
-                dbParams.Add("@DBKeyPerson", toCreate.DBKeyPerson);
-
                 dbConn.Open();
-                reservation = dbConn.Query<Reservation>("dbo.reservation_add", dbParams, commandType: CommandType.StoredProcedure).FirstOrDefault();
+                using (SqlTransaction dbTran = dbConn.BeginTransaction())
+                {
+                    try
+                    {
+                        DynamicParameters dbParams = new DynamicParameters();
+
+                        dbParams.Add("@@DateOfReservation", toCreate.DateOfReservation);
+                        dbParams.Add("@DBKeyFilmShow", toCreate.DBKeyFilmShow);
+                        dbParams.Add("@DBKeyPerson", toCreate.DBKeyPerson);
+
+                        reservation = dbConn.Query<Reservation>("dbo.reservation_add", dbParams, commandType: CommandType.StoredProcedure, transaction: dbTran).FirstOrDefault();
+                        dbTran.Commit();
+                    }
+                    catch
+                    {
+                        dbTran.Rollback();
+                    }
+                }
             }
 
             return reservation;
@@ -39,7 +50,18 @@ namespace CinemaReservation.DataAccess
             using (SqlConnection dbConn = new SqlConnection(connection.ConnectionString))
             {
                 dbConn.Open();
-                result = dbConn.Query<int>("dbo.reservation_del", commandType: CommandType.StoredProcedure).FirstOrDefault();
+                using (SqlTransaction dbTran = dbConn.BeginTransaction())
+                {
+                    try
+                    {
+                        result = dbConn.Query<int>("dbo.reservation_del", commandType: CommandType.StoredProcedure, transaction: dbTran).FirstOrDefault();
+                        dbTran.Commit();
+                    }
+                    catch
+                    {
+                        dbTran.Rollback();
+                    }
+                }
             }
 
             return result == 1;
@@ -95,18 +117,28 @@ namespace CinemaReservation.DataAccess
         {
             Reservation reservation = null;
 
-            using(SqlConnection dbConn = new SqlConnection(connection.ConnectionString))
+            using (SqlConnection dbConn = new SqlConnection(connection.ConnectionString))
             {
-                DynamicParameters dbParams = new DynamicParameters();
-
-                dbParams.Add("@@DBKey", toUpdate.DBKey);
-                dbParams.Add("@@DateOfReservation", toUpdate.DateOfReservation);
-                dbParams.Add("@DBKeyFilmShow", toUpdate.DBKeyFilmShow);
-                dbParams.Add("@DBKeyPerson", toUpdate.DBKeyPerson);
-
                 dbConn.Open();
+                using (SqlTransaction dbTran = dbConn.BeginTransaction())
+                {
+                    try
+                    {
+                        DynamicParameters dbParams = new DynamicParameters();
 
-                reservation = dbConn.Query<Reservation>("dbo.reservation_upd", dbParams, commandType: CommandType.StoredProcedure).FirstOrDefault();
+                        dbParams.Add("@@DBKey", toUpdate.DBKey);
+                        dbParams.Add("@@DateOfReservation", toUpdate.DateOfReservation);
+                        dbParams.Add("@DBKeyFilmShow", toUpdate.DBKeyFilmShow);
+                        dbParams.Add("@DBKeyPerson", toUpdate.DBKeyPerson);
+
+                        reservation = dbConn.Query<Reservation>("dbo.reservation_upd", dbParams, commandType: CommandType.StoredProcedure).FirstOrDefault();
+                        dbTran.Commit();
+                    }
+                    catch
+                    {
+                        dbTran.Rollback();
+                    }
+                }
             }
 
             return reservation;
