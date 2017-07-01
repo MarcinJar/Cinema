@@ -14,6 +14,8 @@ namespace CinemaReservation.App_Start
     using Core.DataLogic;
     using InterfaceDataAccess;
     using DataAccess;
+    using log4net;
+    using System.Reflection;
 
     public static class NinjectWebCommon 
     {
@@ -75,6 +77,10 @@ namespace CinemaReservation.App_Start
             kernel.Bind<IReservationRepository>().To<ReservationRepository>();
             kernel.Bind<IFilmShowLogic>().To<FilmShowLogic>();
             kernel.Bind<IFilmShowRepository>().To<FilmShowRepository>();
+
+            kernel.Bind<ILog>()
+            .ToMethod(c => LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType))
+            .InSingletonScope();
         }        
     }
 }

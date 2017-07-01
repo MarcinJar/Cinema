@@ -1,5 +1,6 @@
 ﻿using CinemaReservation.Core.DataLogic.IDataLogic;
 using CinemaReservation.Model.Models;
+using log4net;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,12 +14,15 @@ namespace CinemaReservation.WebApi.Controllers
     {
         private IList<Cinema> cinemaList = new List<Cinema>();
         private ICinemaLogic cinemaLogic;
+        //public ILog Logger { get; set; }
+        private static readonly ILog log = LogManager.GetLogger(typeof(CinemaController));
 
         public CinemaController() { }
 
-        public CinemaController(ICinemaLogic cinemaLogic)
+        public CinemaController(ICinemaLogic cinemaLogic, ILog Logger)
         {
             this.cinemaLogic = cinemaLogic;
+            //this.Logger = Logger;
         }
 
         // GET: /api/Cinema/
@@ -34,6 +38,7 @@ namespace CinemaReservation.WebApi.Controllers
         public Cinema GetCinema(int id)
         {
             Cinema cinema = this.cinemaLogic.Get(id);
+            log.Info("Get cinema withe id = " + id);
             return cinema;
         }
 
