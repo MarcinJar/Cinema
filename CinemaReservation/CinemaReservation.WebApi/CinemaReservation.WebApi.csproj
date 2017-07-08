@@ -142,13 +142,9 @@
       <Project>{8951de5b-f68f-43be-aebd-5a178e4a8d97}</Project>
       <Name>CinemaReservation.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CinemaReservation.DataAccess\CinemaReservation.DataAccess.csproj">
-      <Project>{FDE99ADD-C2B9-43AA-92F3-1662795A7F00}</Project>
-      <Name>CinemaReservation.DataAccess</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CinemaReservation.InterfaceDataAccess\CinemaReservation.InterfaceDataAccess.csproj">
-      <Project>{7994AEEE-5077-4D19-B45D-86D2788B1EE1}</Project>
-      <Name>CinemaReservation.InterfaceDataAccess</Name>
+    <ProjectReference Include="..\CinemaReservation.DIResolver\CinemaReservation.DIResolver.csproj">
+      <Project>{2da7e446-7e11-4267-8632-96bdc094a2a1}</Project>
+      <Name>CinemaReservation.DIResolver</Name>
     </ProjectReference>
     <ProjectReference Include="..\CinemaReservation.Model\CinemaReservation.Model.csproj">
       <Project>{b8b33127-9469-4b3c-b75c-889d4cd74f17}</Project>

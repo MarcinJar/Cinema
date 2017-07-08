@@ -12,11 +12,11 @@ namespace CinemaReservation.App_Start
     using Ninject.Web.Common;
     using Core.DataLogic.IDataLogic;
     using Core.DataLogic;
-    using InterfaceDataAccess;
-    using DataAccess;
     using log4net;
     using System.Reflection;
-
+    using Ninject.Modules;
+    using DIResolver;
+    using System.Collections.Generic;
     public static class NinjectWebCommon 
     {
         private static readonly Bootstrapper bootstrapper = new Bootstrapper();
@@ -67,20 +67,13 @@ namespace CinemaReservation.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            kernel.Bind<ICinemaLogic>().To<CinemaLogic>();
-            kernel.Bind<ICinemaRepository>().To<CinemaRepository>();
-            kernel.Bind <IPersonLogic>().To<PersonLogic>();
-            kernel.Bind<IPersonRepository>().To<PersonRepository>();
-            kernel.Bind<IMovieLogic>().To<MovieLogic>();
-            kernel.Bind<IMovieRepository>().To<MovieRepository>();
-            kernel.Bind<IReservationLogic>().To<ReservationLogic>();
-            kernel.Bind<IReservationRepository>().To<ReservationRepository>();
-            kernel.Bind<IFilmShowLogic>().To<FilmShowLogic>();
-            kernel.Bind<IFilmShowRepository>().To<FilmShowRepository>();
+            var modules = new List<INinjectModule>
+            {
+                new CoreModul(),
+                new DataAccessModul()
+            };
 
-            kernel.Bind<ILog>()
-            .ToMethod(c => LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType))
-            .InSingletonScope();
+            kernel.Load(modules);
         }        
     }
 }
