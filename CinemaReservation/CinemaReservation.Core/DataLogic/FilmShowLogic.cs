@@ -6,16 +6,19 @@ using System.Text;
 using System.Threading.Tasks;
 using CinemaReservation.Model.Models;
 using CinemaReservation.InterfaceDataAccess;
+using log4net;
 
 namespace CinemaReservation.Core.DataLogic
 {
     public class FilmShowLogic : IFilmShowLogic
     {
         private IFilmShowRepository filmShowRepository;
+        private ILog log;
 
-        public FilmShowLogic(IFilmShowRepository filmShowRepository)
+        public FilmShowLogic(IFilmShowRepository filmShowRepository, ILog log)
         {
             this.filmShowRepository = filmShowRepository;
+            this.log = log;
         }
 
         public FilmShow Add(FilmShow toCreate)

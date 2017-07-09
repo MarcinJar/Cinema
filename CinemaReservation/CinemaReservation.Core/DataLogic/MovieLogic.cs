@@ -6,16 +6,19 @@ using System.Text;
 using System.Threading.Tasks;
 using CinemaReservation.Model.Models;
 using CinemaReservation.InterfaceDataAccess;
+using log4net;
 
 namespace CinemaReservation.Core.DataLogic
 {
     public class MovieLogic : IMovieLogic
     {
         private IMovieRepository movieRepository;
+        private ILog log;
 
-        public MovieLogic(IMovieRepository movieRepository)
+        public MovieLogic(IMovieRepository movieRepository, ILog log)
         {
             this.movieRepository = movieRepository;
+            this.log = log;
         }
 
         public Movie Add(Movie movieToCreate)

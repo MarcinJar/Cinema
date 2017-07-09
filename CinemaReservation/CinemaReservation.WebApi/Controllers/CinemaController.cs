@@ -15,14 +15,14 @@ namespace CinemaReservation.WebApi.Controllers
         private IList<Cinema> cinemaList = new List<Cinema>();
         private ICinemaLogic cinemaLogic;
         //public ILog Logger { get; set; }
-        private static readonly ILog log = LogManager.GetLogger(typeof(CinemaController));
+        private readonly ILog log;
 
         public CinemaController() { }
 
         public CinemaController(ICinemaLogic cinemaLogic, ILog Logger)
         {
             this.cinemaLogic = cinemaLogic;
-            //this.Logger = Logger;
+            this.log = Logger;
         }
 
         // GET: /api/Cinema/
@@ -39,6 +39,7 @@ namespace CinemaReservation.WebApi.Controllers
         {
             Cinema cinema = this.cinemaLogic.Get(id);
             log.Info("Get cinema withe id = " + id);
+            this.log.Info("Get cinema by id");
             return cinema;
         }
 

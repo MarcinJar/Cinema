@@ -67,6 +67,8 @@ namespace CinemaReservation.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
+            kernel.Bind<ILog>().ToMethod(x => LogManager.GetLogger(x.Request.Target.Member.DeclaringType));
+
             var modules = new List<INinjectModule>
             {
                 new CoreModul(),

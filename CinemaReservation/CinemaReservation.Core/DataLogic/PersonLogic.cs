@@ -6,16 +6,19 @@ using System.Text;
 using System.Threading.Tasks;
 using CinemaReservation.Model.Models;
 using CinemaReservation.InterfaceDataAccess;
+using log4net;
 
 namespace CinemaReservation.Core.DataLogic
 {
     public class PersonLogic : IPersonLogic
     {
         private IPersonRepository personRepository;
+        private ILog log;
 
-        public PersonLogic(IPersonRepository personRepository)
+        public PersonLogic(IPersonRepository personRepository, ILog log)
         {
             this.personRepository = personRepository;
+            this.log = log;
         }
 
         public Person Add(Person personToCreate)
